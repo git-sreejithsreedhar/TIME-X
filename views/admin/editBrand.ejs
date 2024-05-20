@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-reviews.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:34 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title><%= locals.title? title:'Edit Brand' %></title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Template CSS -->
+    <link href="/static/assets1/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index.html" class="brand-wrap">
+                <img src="/static/admAssets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" disabled href="/admin/category"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Category</span>
+                    </a>
+                </li>
+                
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/products"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Product</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/brand"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brands</span> </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/getOrder"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span> </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/customer"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Customer</span>
+                    </a>
+                </li>
+
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Account</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-account-login.html">User login</a>
+                        <a href="page-account-register.html">User registration</a>
+                        <a href="page-error-404.html">Error 404</a>
+                    </div>
+                </li>
+                
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <!-- <li class="menu-item has-submenu">
+                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li> -->
+            </ul>
+            <br>
+            <br>
+        </nav>
+    </aside>
+    <main class="main-wrap">
+     
+        <section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Edit Brand</h2>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row gx-5">
+                        <div class="col-lg-9">
+                            <section class="content-body p-xl-4">
+                                <form action="/updates/<%= brand._id  %>" method="post" name="brandForm" onsubmit="return validateBrandForm()">
+                                    <div class="row mb-4">
+                                        <label class="col-lg-3 col-form-label">Brand name*</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" name="brand" value="<%= brand.brand %>" required>
+                                            <span id="brand-error" style="font-size: 14px; margin-top: -20px; color: red;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label class="col-lg-3 col-form-label">Description*</label>
+                                        <div class="col-lg-9">
+                                            <textarea name="description" class="form-control" rows="4"><%= brand.description %></textarea>
+                                            <span id="description-error" style="font-size: 14px; margin-top: -20px; color: red;"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+                                    </div>
+                                </form>
+                            </section>
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/static/assets1/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/static/assets1/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets1/js/vendors/select2.min.js"></script>
+    <script src="/static/assets1/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/static/assets1/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/static/assets1/js/main.js" type="text/javascript"></script>
+    <script>
+        function validateBrandForm() {
+            // Brand Name validation
+            var brandInput = document.forms["brandForm"]["brand"];
+            var brandError = document.getElementById("brand-error");
+            var brandRegex = /^[A-Z]+$/;
+    
+            if (!brandRegex.test(brandInput.value.trim())) {
+                brandError.innerHTML = "Brand name should contain only capital letters";
+                brandError.style.color = "red";
+                return false;
+            } else {
+                brandError.innerHTML = "";
+            }
+    
+            // Description validation
+            var descriptionInput = document.forms["brandForm"]["description"];
+            var descriptionError = document.getElementById("description-error");
+    
+            // Split the description into words
+            var words = descriptionInput.value.trim().split(/\s+/).filter(function (word) {
+                return word.length > 0;
+            });
+    
+            if (words.length < 6) {
+                descriptionError.innerHTML = "Description should have at least 6 words";
+                descriptionError.style.color = "red";
+                return false;
+            } else {
+                descriptionError.innerHTML = "";
+            }
+    
+            return true;
+        }
+    </script>
+    
+    
+</body>
+
+
+</html>

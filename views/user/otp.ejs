@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-account-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:33 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title><%= locals.title? title:'OTP verification' %></title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="static/assets1/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="static/assets1/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <main>
+        <section class="content-main mt-80 mb-80">
+            <div class="card mx-auto card-login">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">OTP Verification</h4>
+                    <% if (locals.alert) { %>
+                        <div class="alert alert-danger text-center m-3" id="error">
+                          <%= locals.alert %>
+                        </div>
+                        <% } %>
+                        <form action="/verifyOtp" method="post">
+                          <div class="mb-3">
+                              <input class="form-control" placeholder="Enter your email" type="email" value="<%= email %>" name="email">
+                          </div>
+                          <div class="mb-3">
+                              <input class="form-control" placeholder="Enter Your OTP" type="text" name="otp">
+                          </div>
+                          <div id="message"></div>
+                          <div class="mb-4">
+                              <button type="submit" class="btn btn-primary w-100"> Verify </button>
+                          </div>
+                      </form>
+                      <div id="countdown"></div>
+                      <form action="/resendOtp" method="post">
+                          <input type="hidden" name="email" value="<%= email %>">
+                          <div class="mb-3" id="resendButtonContainer">
+                              <button type="submit" id="resendBtn" class="float-end font-sm text-muted" style="border: none; background-color: rgb(255, 255, 255); display: none;">Resend OTP</button>
+                          </div>
+                          <div id="countdownContainer" style="display: none;">
+                              <p id="countdown"></p>
+                          </div>
+                      </form>
+                      
+                </div>
+            </div>
+        </section>
+        <footer class="main-footer text-center">
+            <p class="font-xs mb-30">All rights reserved</p>
+        </footer>
+    </main>
+
+    <script src="static/assets1/js/vendors/bootstrap.bundle.min.js"></script>
+    <!-- Main Script -->
+    <script>
+        setTimeout(() => {
+        document.getElementById("error").style.display = "none";
+        }, 3000);
+    </script> 
+    <script src="static/assets1/js/main.js" type="text/javascript"></script>
+    
+
+    <script>
+        // Countdown function
+        function startCountdown(duration, display, resendButton) {
+          let timer = duration;
+          let countdownInterval = setInterval(function () {
+              if (timer < 0) {
+                  clearInterval(countdownInterval);
+                  // Timer expired, hide countdown and show button
+                  display.style.display = 'none';
+                  resendButton.style.display = 'block';
+              } else {
+                  display.textContent = "You can resend the OTP after " + timer + " seconds";
+                  timer--;
+              }
+          }, 1000);
+}
+
+        // Start countdown on page load
+        document.addEventListener('DOMContentLoaded', function () {
+          let thirtySeconds = 60;
+          let display = document.querySelector('#countdown');
+          let resendButton = document.querySelector('#resendBtn');
+          startCountdown(thirtySeconds, display, resendButton);
+      });
+
+
+    </script>
+   
+</body>
+</html>
