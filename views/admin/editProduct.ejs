@@ -1,11 +1,14 @@
+
+
+
 <!DOCTYPE HTML>
 <html lang="en">
 
 
-<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-reviews.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:34 GMT -->
 <head>
     <meta charset="utf-8">
-    <title>Evara Dashboard</title>
+    <title>Update Product </title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,19 +16,41 @@
     <meta property="og:type" content="">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/static/assets1/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link href="/static/assets1/css/main.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+<style>
+    .existing-images .image-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+  
+  .existing-images .existing-image {
+    width: 90px; 
+    height: 60px;
+  }
+  
+  .existing-images .delete-image-btn {
+   
+    background-color: transparent;
+    border: none;
+    
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  </style>
 
 <body>
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
-                <img src="/static/admAssets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+                <img src="/static/assets1/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
@@ -33,65 +58,58 @@
         </div>
         <nav>
             <ul class="menu-aside">
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a class="menu-link" href="/admin"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Product</span>
+                    </a>
+                </li>
                 <li class="menu-item">
                     <a class="menu-link" disabled href="/admin/category"> <i class="icon material-icons md-pie_chart"></i>
                         <span class="text">Category</span>
                     </a>
                 </li>
-                
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/products"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Product</span>
-                    </a>
-                </li>
-
                 <li class="menu-item">
                     <a class="menu-link" href="/admin/brand"> <i class="icon material-icons md-stars"></i>
                         <span class="text">Brands</span> </a>
                 </li>
-
                 <li class="menu-item">
-                    <a class="menu-link" href="/admin/getOrder"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span> </a>
+                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
                 </li>
-
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/coupon"> <i class="icon material-icons md-monetization_on"></i>
+                        <span class="text">Coupon</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/bestselling"> <i class="icon material-icons md-store"></i>
+                        <span class="text">Best Selling</span>
+                    </a>
+                </li>
                 <li class="menu-item">
                     <a class="menu-link" href="/admin/customer"> <i class="icon material-icons md-person"></i>
                         <span class="text">Customer</span>
                     </a>
                 </li>
-
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Account</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-account-login.html">User login</a>
-                        <a href="page-account-register.html">User registration</a>
-                        <a href="page-error-404.html">Error 404</a>
-                    </div>
-                </li>
-                
             </ul>
             <hr>
             <ul class="menu-aside">
-                <!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-settings"></i>
+                <li class="menu-item">
+                    <a class="menu-link" href="/adminlogout"> <i class="icon material-icons md-local_offer"></i>
                         <span class="text">Logout</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
             <br>
             <br>
         </nav>
     </aside>
- <!-------------side navbar Ends------------------------------------------------------------------------------->   
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -100,12 +118,6 @@
                         <input list="search_terms" type="text" class="form-control" placeholder="Search term">
                         <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
                     </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
                 </form>
             </div>
             <div class="col-nav">
@@ -148,167 +160,151 @@
             </div>
         </header>
         <section class="content-main">
-            <form action="/editproductsubmit/<%= product._id%>" method="post" enctype="multipart/form-data" onsubmit="return validateForm(event)">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="content-header">
-                            <h2 class="content-title">Edit Product</h2>
-                        </div>
+        </form>
+    </div>
+  </header>
+  <section class="content-main">
+    <form action="/editproductsubmit/<%= product._id %>" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-6">
+                <div class="content-header">
+                    <h2 class="content-title">Update Product</h2>
+                    <% if (locals.alert) { %>
+                    <div class="alert alert-danger text-center m-3" id="error">
+                        <%= locals.alert %>
                     </div>
+                    <% } %>
+                    <div>
+                        <button class="btn btn-md rounded font-sm hover-up" type="submit">Update</button>
+                    </div>
+                    <span id="submit-error" style="font-size: 14px; margin-top: -20px" onclick="return validateForm()"></span>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>1. General info</h6>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="mb-4">
-                                            <label class="form-label">Product Name</label>
-                                            <input type="text" value="<%= product.productname %>" placeholder="Type here" class="form-control" name="productname" id="product_name" onkeyup="validateName()">
-                                            <span id="name-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Description</label>
-                                            <textarea placeholder="Type here" class="form-control" name="description" id="product_description" onkeyup="validateDescription()" rows="4"><%= product.description %></textarea>
-                                            <span id="description-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Brand</label>
-                                            <select class="form-select" name="brand">
-                                                <% brands.forEach(brand => { %>
-                                                    <option value="<%= brand._id %>" <%= brand._id === product.brand ? 'selected' : '' %>><%= brand.brand %></option>
-                                                <% }); %>
-                                            </select>
-                                            <span id="brand-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Category</label>
-                                            <select class="form-select" name="category">
-                                                <% categories.forEach(category => { %>
-                                                    <option value="<%= category._id %>" <%= category._id === product.category ? 'selected' : '' %>><%= category.category %></option>
-                                                <% }); %>
-                                            </select>
-                                            <span id="category-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                    </div> <!-- col.// -->
-                                </div> <!-- row.// -->
-                                <hr class="mb-4 mt-0">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>2. Pricing</h6>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="mb-4">
-                                            <label class="form-label">Cost per unit</label>
-                                            <input type="text" placeholder="$00.0" class="form-control" name="price" value="<%= product.price %>" id="product_price" onkeyup="validatePrice()">
-                                            <span id="price-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Old Price</label>
-                                            <input type="text" placeholder="$00.0" class="form-control" name="oldprice" value="<%= product.oldprice %>" id="old_price" onkeyup="validatePrice()">
-                                            <span id="oldprice-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                    </div> <!-- col.// -->
-                                </div> <!-- row.// -->
-                                <hr class="mb-4 mt-0">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>3. Stock</h6>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="mb-4">
-                                            <label class="form-label">No of Stocks</label>
-                                            <input type="text" placeholder="Type here" class="form-control" name="stock" value="<%= product.stock %>" id="product_stock" onkeyup="validateStock()">
-                                            <span id="stock-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        </div>
-                                    </div> <!-- col.// -->
-                                </div> <!-- row.// -->
-                                <hr class="mb-4 mt-0">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <h6>4. Product Images</h6>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            
-                                            <div class="col-md-9 existing-images">
+            </div>
+        </div>
+        <div id="error-messages" class="alert alert-danger text-center m-3" style="display: none;"></div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>1. General info</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Product Name</label>
+                                    <input type="text" value="<%= product.productname %>" class="form-control" name="productname" id="product_name" onkeyup="validateName()">
+                                    <span id="name-error" style="font-size: 14px; margin-top: -20px"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea placeholder="Type here" class="form-control" rows="4" name="description" id="product_description" onkeyup="validateDescription()"><%= product.description %></textarea>
+                                    <span id="description-error" style="font-size: 14px; margin-top: -20px; color: red;"></span>
+                                </div>
 
-                                                
+                                <div class="mb-4">
+                                    <label class="form-label">Brand name</label>
+                                    <select class="form-select" name="brand">
+                                        <% brands.forEach(brand => { %>
+                                        <option value="<%= brand._id %>" <%= brand._id.equals(product.brand) ? 'selected' : '' %>>
+                                            <%= brand.brand %>
+                                        </option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Stock</label>
+                                    <input type="text" placeholder="Enter your stock" class="form-control" value="<%= product.stock %>" name="stock" id="product_stock" onkeyup="validateStock()">
+                                    <span id="stock-error" style="font-size: 14px; margin-top: -20px"></span>
+                                </div>
+                              
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>2. Pricing</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Offer Price</label>
+                                    <input type="text" placeholder="₹0.00" class="form-control" value="<%= product.price %>" name="price" id="product_oldprice" onkeyup="validateOldPrice()">
+                                    <span id="oldprice-error" style="font-size: 14px; margin-top: -20px"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Max Retail Price</label>
+                                    <input type="text" placeholder="₹0.00" class="form-control" value="<%= product.oldprice %>" name="oldprice" id="product_price" onkeyup="validatePrice()">
+                                    <span id="price-error" style="font-size: 14px; margin-top: -20px"></span>
+                                </div>
+                               
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>3. Category</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                  
 
-                                               <div class="row"> 
-                                             
-                                                    <div class="col-md-9">
+
+
+
+                                    <div class="mb-4">
+                                        <select class="form-select" name="category">
+                                            <% categories.forEach(category => { %>
+                                            <option value="<%= category._id %>" <%= category._id.equals(product.category) ? 'selected' : '' %>>
+                                                <%= category.category %>
+                                            </option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>4. Media</h6>
+                            </div>
+                            <div class="col-md-9">
                                 <div class="mb-4">
                                     <label class="form-label">Images</label><br>
                                     <div class="mb-4">
                                         <label class="form-label">Replace the Images ( minimum 3 Images )</label>
                                         <div class="existing-images">
                                             <% if (product.images && product.images.length > 0) { %>
-                                                <div class="image-container">
-                                                    <% product.images.forEach((imageUrl, index) => { %>
-                                                    <div class="image-preview">
-                                                        <img src="/static/<%= imageUrl %>" name="images" alt="Existing Image" class="existing-image">
-                                                        <i class="fa-solid fa-repeat replace-image-icon" data-index="<%= index %>"></i>
-                                                         <i class="fa-solid fa-trash delete-image-btn" data-index="<%= index %>"></i> 
-                                                    </div>
-                                                    <% }) %>
+                                            <div class="image-container">
+                                                <% product.images.forEach((imageUrl, index) => { %>
+                                                <div class="image-preview">
+                                                    <img src="/static/<%= imageUrl %>" alt="Existing Image" class="existing-image">
+                                                    <i class="fa-solid fa-repeat replace-image-icon" data-index="<%= index %>"></i>
+                                                    <!-- <i class="fa-solid fa-trash delete-image-btn" data-index="<%= index %>"></i> -->
                                                 </div>
-                                                <% } else { %>
-                                                <p>No existing images</p>
-                                                <% } %>
+                                                <% }) %>
                                             </div>
+                                            <% } else { %>
+                                            <p>No existing images</p>
+                                            <% } %>
                                         </div>
-                                                    
-
-                                             
-                                                <!-- <% if (product.images && product.images.length > 0) { %>
-                                                    <div class="mb-4">
-                                                        <label class="form-label">Image-1</label>
-                                                        <input class="form-control" value="proimg1" id="product_image1" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 1)" required>
-                                                        <span id="image1-error" style="font-size: 14px; margin-top: -20px"></span>
-                                                        <div id="image-preview1" class="image-preview mb-2"></div>
-                                                        <button class="btn btn-secondary mt-2" id="crop-button1" style="display: none;" 
-                                                        onclick="cropImage(1)">Crop</button>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label class="form-label">Image-2</label>
-                                                        <input class="form-control" id="product_image2" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 2)" required>
-                                                        <span id="image2-error" style="font-size: 14px; margin-top: -20px"></span>
-                                                        <div id="image-preview2" class="image-preview mb-2"></div>
-                                                        <button class="btn btn-secondary mt-2" id="crop-button2" style="display: none;" 
-                                                        onclick="cropImage(2)">Crop</button>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <label class="form-label">Image-3</label>
-                                                        <input class="form-control" id="product_image3" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 3)" >
-                                                        <span id="image3-error" style="font-size: 14px; margin-top: -20px"></span>
-                                                        <div id="image-preview3" class="image-preview mb-2"></div>
-                                                        <button class="btn btn-secondary mt-2" id="crop-button3" style="display: none;" onclick="cropImage(3)">Crop</button>
-                                                    </div>
-                                                    
-                                                    
-                                                <% } else { %>
-                                                    <p>No existing images</p>
-                                                <% } %> -->
-                                            </div> <!-- col.// -->
-                                        </div> <!-- .row end// -->
-                                    </div> <!-- col.// -->
-                                </div> <!-- .row end// -->
-                                <hr class="mb-4 mt-0">
-                                <div>
-                                    <button class="btn btn-md rounded font-sm hover-up" type="submit">Save</button>
-                                    <span id="submit-error" style="font-size: 14px; margin-top: -20px"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <!-- <label class="form-label">New Images</label> -->
+                                        <input class="form-control" name="images" style="display: none;" type="file" id="product_image" multiple />
+                                        <span id="image-error" style="font-size: 14px; margin-top: -20px"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </section> <!-- content-main end// -->
-        
+            </div>
+        </div>
+    </form>
+    
+</section> 
+
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
@@ -328,169 +324,16 @@
     <script src="/static/assets1/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="/static/assets1/js/vendors/select2.min.js"></script>
     <script src="/static/assets1/js/vendors/perfect-scrollbar.js"></script>
-    <script src="/static/assets1/js/vendors/jquery.fullscreen.min.js"></script>
+
     <!-- Main Script -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/assets1/js/main.js" type="text/javascript"></script>
-</body>
-<!-- <script>   
-    const croppers = [];
-    const files = [];
-    let currentIndex = 0;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
-    function previewImages(event) {
-    const previewContainer = document.getElementById("image-preview");
-    previewContainer.innerHTML = "";
-    const files = event.target.files;
-
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.classList.add("img-preview");
-
-            const deleteIcon = document.createElement("i");
-            deleteIcon.className = "fa-solid fa-trash text-danger";
-            deleteIcon.onclick = function () {
-                this.parentNode.remove();
-                updateSelectedFiles();
-            };
-
-            const replaceIcon = document.createElement("i");
-            replaceIcon.className = "fa-solid fa-repeat text-success ms-2";
-            replaceIcon.onclick = function () {
-                const index = Array.from(this.parentNode.parentNode.children).indexOf(this.parentNode);
-                const fileInput = document.createElement('input');
-                fileInput.type = 'file';
-                fileInput.accept = 'image/*';
-                fileInput.onchange = function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                    img.src = e.target.result;
-                    updateFileInput(file, index);
-                    };
-                    reader.readAsDataURL(file);
-                }
-                };
-                fileInput.click();
-            };
-
-        const cropIcon = document.createElement("i");
-        cropIcon.className = "fa-solid fa-crop text-info ms-2";
-        cropIcon.onclick = function () {
-            cropImage(img, i);
-        };
-
-            const div = document.createElement("div");
-            div.appendChild(img);
-            div.appendChild(deleteIcon);
-            div.appendChild(replaceIcon);
-            div.appendChild(cropIcon);
-            previewContainer.appendChild(div);
-            };
-
-            reader.readAsDataURL(file);
-        }
-        }
-    </script> -->
- 
-
-
-
-    <!-- <script>
-        // Handle replacement of images
-        document.querySelectorAll('.replace-image-icon').forEach(icon => {
-          icon.addEventListener('click', function () {
-            const index = this.dataset.index;
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = 'image/*';
-            fileInput.onchange = function (event) {
-              const file = event.target.files[0];
-              if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const imagePreview = document.querySelector('.existing-images .image-container .image-preview:nth-child(' + (parseInt(index) + 1) + ') img');
-
-                  imagePreview.src = e.target.result;
-                  updateFileInput(file, index);
-                };
-                reader.readAsDataURL(file);
-              }
-            };
-            fileInput.click();
-          });
-        });
-      
-        function updateFileInput(file, index) {
-          const fileInput = document.getElementById('product_image');
-          const fileList = new DataTransfer();
-          fileList.items.add(file);
-          fileInput.files = fileList.files;
-        }
-    </script>
-    
-        <script>
-       
-       window.addEventListener('DOMContentLoaded', function () {
-        const existingImages = document.querySelectorAll('.existing-images img');
-        const fileInput = document.getElementById('product_image');
-        const fileList = new DataTransfer();
-    
-        existingImages.forEach(function (image) {
-            const url = image.getAttribute('src');
-            const filename = url.substring(url.lastIndexOf('/') + 1);
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => {
-                    const file = new File([blob], filename, { type: blob.type });
-                    fileList.items.add(file);
-                    fileInput.files = fileList.files;
-                });
-        });
-    });
-    
-    document.querySelectorAll('.delete-image-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const index = this.dataset.index;
-            const parentDiv = this.parentElement;
-            parentDiv.remove(); 
-            updateFileInput(); 
-        });
-    });
-    
-    function updateFileInput() {
-        const fileInput = document.getElementById('product_image');
-        const existingImages = document.querySelectorAll('.existing-images img');
-        const fileList = new DataTransfer();
-        
-        existingImages.forEach(function (image) {
-            const url = image.getAttribute('src');
-            const filename = url.substring(url.lastIndexOf('/') + 1);
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => {
-                    const file = new File([blob], filename, { type: blob.type });
-                    fileList.items.add(file);
-                    fileInput.files = fileList.files;
-                });
-        });
-    
-        
-        if (existingImages.length === 0) {
-            fileInput.value = ''; 
-        }
-    }
-    
-        </script> -->
-
-    //------------------------------------------------------------------------------------------------
-    
-       <script>
+    <script>
         // Handle replacement of images
         document.querySelectorAll('.replace-image-icon').forEach(icon => {
           icon.addEventListener('click', function () {
@@ -540,7 +383,7 @@
                  });
          });
      });
-             //-------------------------------------------------------------------------------------------------
+     
     //  document.querySelectorAll('.delete-image-btn').forEach(button => {
     //      button.addEventListener('click', function () {
     //          const index = this.dataset.index;
@@ -549,7 +392,7 @@
     //          updateFileInput(); 
     //      });
     //  });
-            //------------------------------------------------------------------------------------------------------
+     
      function updateFileInput() {
          const fileInput = document.getElementById('product_image');
          const existingImages = document.querySelectorAll('.existing-images img');
@@ -574,12 +417,7 @@
      }
      
 </script>
-      
-
-    
-
-
-   <script>
+<script>
     var nameError = document.getElementById("name-error");
     var descriptionError = document.getElementById("description-error");
     var priceError = document.getElementById("price-error");
@@ -587,7 +425,9 @@
     var stockError = document.getElementById("stock-error");
     var submitError = document.getElementById("submit-error");
     var colorError = document.getElementById('color-error');
- 
+    var oldpriceError = document.getElementById('oldprice-error');
+    var ramError = document.getElementById('ram-error');
+    var storageError = document.getElementById('storage-error');
 
     function validateName() {
         var name = document.getElementById("product_name").value.trim();
@@ -637,18 +477,17 @@
         return true;
     }
 
-    function validateoldprice() {
-    var price = document.getElementById("old_price").value.trim();
-    var newPrice = document.getElementById("product_price").value.trim();
-    if (price.length === 0 || isNaN(price) || parseFloat(price) <= 0 || price > newPrice) {
-        oldpriceError.innerHTML = "Old price is required and must be a positive number";
-        oldpriceError.style.color = "red";
-        return false;
+    function validateOldPrice() {
+        var oldPrice = document.getElementById("product_oldprice").value.trim();
+        if (oldPrice.length === 0 || isNaN(oldPrice) || parseFloat(oldPrice) <= 0) {
+            oldpriceError.innerHTML = "Old Price is required and must be a positive number";
+            oldpriceError.style.color = "red";
+            return false;
+        }
+        oldpriceError.innerHTML = "Valid";
+        oldpriceError.style.color = "green";
+        return true;
     }
-    oldpriceError.innerHTML = "Valid";
-    oldpriceError.style.color = "green";
-    return true;
-}
 
     function validateStock() {
         var stock = document.getElementById("product_stock").value.trim();
@@ -662,7 +501,17 @@
         return true;
     }
 
-   
+    function validateStorage() {
+        var storage = document.getElementById("product_storage").value.trim();
+        if (storage.length === 0 || isNaN(storage) || parseFloat(storage) <= 0) {
+            storageError.innerHTML = "Storage is required and must be a positive number";
+            storageError.style.color = "red";
+            return false;
+        }
+        storageError.innerHTML = "Valid";
+        storageError.style.color = "green";
+        return true;
+    }
 
     function validateForm() {
         if (
@@ -677,27 +526,18 @@
             submitError.style.display = "block";
             submitError.innerHTML = "Please enter all the fields correctly.";
             submitError.style.color = "red";
-            submitError.style.float = "right"; 
             setTimeout(function () {
                 submitError.style.display = "none";
-                
             }, 3000);
             return false;
         }
         return true;
     }
-
- //------------------------------------------------------------------------------------
- 
- 
-</script> 
-      
+</script>
+    
 
    
 </body>
 
 
-</html>
-
-<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
 </html>

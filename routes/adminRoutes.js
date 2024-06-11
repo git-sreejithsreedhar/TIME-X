@@ -58,6 +58,8 @@ router.post('/admin/postAddCoupon', isAdmin, adminOrderController.postAddCoupon)
 // router.get('/couponpublishedd/:Id',isAdmin,isAdmin,adminController.publishcoupon)
 // router.get('/couponunpublishedd/:Id',isAdmin,adminController.unpublishcoupon)
 router.post('/couponpubunpub/:Id',isAdmin,adminOrderController.pubUnpub)
+router.get('/admin/coupon/edit/:Id', isAdmin, adminOrderController.editCoupon)
+router.post('/admin/updateCoupon/:Id', isAdmin, adminOrderController.updateCoupon)
 
 // router.get('/admin/sales', isAdmin, adminController.getSales)
 

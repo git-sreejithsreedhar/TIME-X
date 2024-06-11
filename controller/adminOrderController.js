@@ -141,28 +141,6 @@ const adminOrderController = {
     },
 
 //publish and unpublish coupon
-// unpublishcoupon: async (req,res,next)=>{
-//     try{
-//         const Id = req.params.Id
-//         await Coupon.findByIdAndUpdate(Id, { isListed: false })
-//         res.redirect('/admin/coupon')
-//     }
-//     catch(err){
-//         next(err)
-//     }
-// },
-// publishcoupon: async (req,res,next)=>{
-//     try{
-//         const Id = req.params.Id
-//         await Coupon.findByIdAndUpdate(Id, { isListed: true })
-//         res.redirect('/admin/coupon')
-//     }
-//     catch(err){
-//         next(err)
-//     }
-// },
-
-
 pubUnpub: async (req, res, next) => {
     try {
         const Id = req.params.Id;
@@ -182,12 +160,46 @@ pubUnpub: async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+},
+
+// Edit coupon---------------------------
+editCoupon: async (req, res, next) => {
+    try {
+        const couponId = req.params.Id;
+        const coupon = await Coupon.findById(couponId); 
+
+        res.render('admin/editCoupon', {
+            title: "Edit Coupon",
+            coupon: coupon,
+        });
+    } catch (error) {
+        next(error);
+    }
+},
+
+updateCoupon: async (req, res, next) => {
+    try {
+        const couponId = req.params.Id;
+        const { coupon, description, percentage, maximumamount, expiryDate } = req.body;
+        // console.log(req.body);
+
+        await Coupon.findByIdAndUpdate(couponId, {
+            coupon: coupon,
+            description: description,
+            percentage: percentage,
+            maximumamount: maximumamount,
+            expiryDate: new Date(expiryDate)
+        });
+
+        res.json({ success: true, updatedCoupon });
+
+        res.redirect('/admin/coupon');
+
+    }
+    catch (error) {
+        next (error)
+    }
 }
-
-
-
-
-
 
 
 }

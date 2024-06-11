@@ -7,6 +7,9 @@ const Products = require('../model/products');
 
 
 const multer = require('multer')
+const sharp = require('sharp')
+
+
 
 
 
@@ -73,11 +76,13 @@ postAddProducts:(req,res,next)=>{
             }
             const images = req.files.map((file)=>`/product_images/${file.filename}`)
 
+            const discount = Math.floor(((req.body.oldprice - req.body.price)/req.body.oldprice) * 100)
+
             const product = new Products({
                 productname:req.body.productname,
                 description:req.body.description,
                 category:req.body.category,
-
+                productDiscount:discount,
                 brand:req.body.brand,
                 stock:req.body.stock,
                 colour:req.body.colour,
@@ -123,44 +128,112 @@ publishProduct:async (req, res, next)=>{
 
 //get edit products--------------------------
 
-getEditProducts:async(req, res, next) => {
-    try{
-                const Id = req.params.Id
-                const product = await Products.findById(Id)
-                console.log(product.images[0]);
+// getEditProducts:async(req, res, next) => {
+//     try{
+//                 const Id = req.params.Id
+//                 const product = await Products.findById(Id)
+//                 console.log(product.images[0]);
               
 
 
-                if(!product){
-                    redirect('/admin/product')
-                } else {
-                    const brand = await Brand.find()
-                const category = await Category.find()
+//                 if(!product){
+//                     redirect('/admin/product')
+//                 } else {
+//                     const brand = await Brand.find()
+//                 const category = await Category.find()
                 
-                res.render('admin/editProduct',{
-                    title:'Edit Product',
-                    brands : brand,
-                    categories : category,
-                    product : product,
-                    proimg1: product.images[0]
+//                 res.render('admin/editProduct',{
+//                     title:'Edit Product',
+//                     brands : brand,
+//                     categories : category,
+//                     product,
+//                     proimg1: product.images[0]
 
-                })
+//                 })
 
-                }
+//                 }
 
                 
                 
-            }
-            catch(err){
-                next(err)
-            }
-        },
+//             }
+//             catch(err){
+//                 next(err)
+//             }
+//         },
+
+getEditProducts: async (req, res, next) => {
+    try {
+        const Id = req.params.Id;
+        const product = await Products.findById(Id);
+
+        if (!product) {
+            return res.redirect('/admin/products'); // Corrected redirect URL
+        } else {
+            const brands = await Brand.find();
+            const categories = await Category.find();
+            
+            res.render('admin/editProduct', {
+                title: 'Edit Product',
+                brands,
+                categories,
+                product,
+                proimg1: product.images[0]
+            });
+        }
+    } catch (err) {
+        next(err);
+    }
+},
+
 
 
 
 // Updated postEditProduct controller function
 
-postEditProduct :async (req, res) => {
+// postEditProduct :async (req, res) => {
+//     const id = req.params.Id;
+
+//     try {
+//         upload.array('images')(req, res, async (err) => {
+//             if (err) {
+//                 return res.json({ message: err.message, type: 'danger' });
+//             }
+
+//             const images = req.files.map((file)=>`/product_images/${file.filename}`)
+
+//             console.log(images,"234234");   
+
+
+//             const result = {
+//                 product: req.body.productname,
+//                 description: req.body.description,
+//                 brand: req.body.brand,
+//                 category: req.body.category,
+//                 price: req.body.price,
+//                 oldprice: req.body.oldprice,
+//                 stock: req.body.stock,
+//                 images: images
+//             };
+
+//             console.log(result)
+
+//             if(images.length > 0){
+//                 result.images = images
+//             }else{
+//                 console.log("There is no products");
+//             }
+
+//             const updateProduct = await Products.findByIdAndUpdate(id,result, {new: true})
+
+//             res.redirect('/admin/products');
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         res.json({ message: err.message, type: 'danger' });
+//     }
+// },
+
+postEditProduct: async (req, res) => {
     const id = req.params.Id;
 
     try {
@@ -169,29 +242,23 @@ postEditProduct :async (req, res) => {
                 return res.json({ message: err.message, type: 'danger' });
             }
 
-            const images = req.files.map((file)=>`/product_images/${file.filename}`)
+            const existingProduct = await Products.findById(id);
 
-            console.log(images,"234234");   
-
+            // Get the new images if any, or use existing images
+            const images = req.files.length > 0 ? req.files.map(file => `/product_images/${file.filename}`) : existingProduct.images;
 
             const result = {
-                product: req.body.product,
-                description: req.body.description,
-                brand: req.body.brand,
-                category: req.body.category,
-                price: req.body.price,
-                oldprice: req.body.oldprice,
-                stock: req.body.stock,
+                productname: req.body.productname || existingProduct.productname,
+                description: req.body.description || existingProduct.description,
+                brand: req.body.brand || existingProduct.brand,
+                category: req.body.category || existingProduct.category,
+                price: req.body.price || existingProduct.price,
+                oldprice: req.body.oldprice || existingProduct.oldprice,
+                stock: req.body.stock || existingProduct.stock,
                 images: images
             };
 
-            if(images.length > 0){
-                result.images = images
-            }else{
-                console.log("There is no products");
-            }
-
-            const updateProduct = await Products.findByIdAndUpdate(id,result, {new: true})
+            const updateProduct = await Products.findByIdAndUpdate(id, result, { new: true });
 
             res.redirect('/admin/products');
         });
@@ -200,8 +267,6 @@ postEditProduct :async (req, res) => {
         res.json({ message: err.message, type: 'danger' });
     }
 },
-
-
 
 
 

@@ -159,7 +159,8 @@
                                     <th>Coupon</th>
                                     <th>Description</th>
                                     <th>Status</th>
-                                    <th class="text-end">List/Unlist</th>
+                                    <th>List/Unlist</th>
+                                    <th class="text-end">Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,13 +177,17 @@
                                         <% } %>
                                     </td>
                                    
-                                    <td class="text-end">
+                                    <td>
                                         <% if (row.isListed == false) { %>
                                           <button onclick="toggleCouponStatus('<%= row._id %>')" class="btn btn-md rounded font-sm">List</button>
                                         <% } else { %>
                                           <button onclick="toggleCouponStatus('<%= row._id %>')" class="btn btn-danger rounded font-sm">Unlist</button>
                                         <% } %>
-                                      </td>
+                                    </td>
+
+                                    <td class="text-end">
+                                        <a href="/admin/coupon/edit/<%= row._id %>" class="btn btn-md rounded font-sm">Edit</a>
+                                    </td>
                                       
                                 </tr>
                                 <% }) %>

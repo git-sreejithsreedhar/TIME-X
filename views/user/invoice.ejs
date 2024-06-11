@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .order-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .customer-details,
+        .company-details,
+        .product-details,
+        .price-details {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .price-details p {
+            margin: 5px 0;
+            font-weight: bold;
+        }
+    </style>
+    <div class="order-container">
+        <div class="customer-details">
+            <h2>Customer Details</h2>
+            <p>Name: <%= user.billingdetails.name %> </p>
+            <p>Email: <%= user.billingdetails.email %> </p>
+            <p>Phone: <%= user.billingdetails.phone %> </p>
+            <p>Address: <%= user.billingdetails.buildingname %>, <%= user.billingdetails.city %> , India</p>
+        </div>
+        <div class="company-details">
+            <h2>Company Details</h2>
+            <p>Company Name: Time X</p>
+            <p>Address: 456 Business Ave, Townsville, Country</p>
+            <p>Phone: +0987654321</p>
+            <p>Email: info@abccorp.com</p>
+        </div>
+        <div class="product-details">
+            <h2>Product Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% order.items.forEach((row) => { %>
+                    <tr>
+                        <td><%= row.product.productname %></td>
+                        <td><%= row.quantity %></td>
+                        <td><%= row.price %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="price-details">
+            <h2>Price Details</h2>
+            <p>Subtotal: Rs. <%= order.discountAmount + order.totalprice %></p>
+            <p>Discount: Rs. <%= order.discountAmount %> </p>
+            <p>Total: Rs. <%= order.totalprice %></p>
+        </div>
+    </div> 
+</body>
+</html>

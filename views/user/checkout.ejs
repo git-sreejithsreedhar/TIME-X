@@ -85,16 +85,16 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Mobile Hub
+                                <span class="fi-rs-apps"></span> 
                             </a>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a href="/">Home</i></a>
-                                    <li><a href="/shop">Shop</i></a></li>
-                                    <li class="position-static"><a href="/profile">My Profile</i></a></li>
-                                    <li><a href="/wallet">Wallet</a></li>
+                                    <li><a  href="/userHome">Home</i></a>
+                                    <li><a href="/user/shop">Shop</i></a></li>
+                                    <li class="position-static"><a class="active" href="/user/dashboard">My Profile</i></a></li>
+                                    <li><a href="/user/wallet">Wallet</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -326,6 +326,7 @@
                                         </div>
                                     </div>
                                 </div> -->
+                                <span id="check-error" style="font-size: 14px; margin-top: -5px"></span>
                                 <div class="payment_method">
     <div class="mb-25"> 
         <h5>Payment Method</h5>
@@ -616,9 +617,15 @@
           }, 3000);
           return false;
         }
-        else if (totalPrice > 30000 && paymentCODCheckbox.checked) {
+        else if (totalPrice > 5000 && paymentCODCheckbox.checked) {
           paymentStatusInput.value = "Pending";
           checkError.style.display = "block";
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "COD is not available for orders above Rs 10000.!",
+            // footer: '<a href="#">Why do I have this issue?</a>'
+            });
           checkError.innerHTML = "COD is not available for orders above Rs 30000.";
           checkError.style.color = "red";
           setTimeout(function () {

@@ -62,7 +62,7 @@
                         <span class="text">Orders</span> </a>
                 </li>
 
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a class="menu-link" href="/admin/coupon"> <i class="icon material-icons md-monetization_on"></i>
                         <span class="text">Coupon</span>
                     </a>
@@ -103,7 +103,7 @@
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
-                <form class="searchform">
+                <!-- <form class="searchform">
                     <div class="input-group">
                         <input list="search_terms" type="text" class="form-control" placeholder="Search term">
                         <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
@@ -114,7 +114,7 @@
                         <option value="Apple iphone">
                         <option value="Ahmed Hassan">
                     </datalist>
-                </form>
+                </form> -->
             </div>
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
@@ -128,24 +128,16 @@
                     <li class="nav-item">
                         <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguag3q1e">
-                            <a class="dropdown-item text-brand" href="#"><img src="/static/admAssets/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="/static/admAssets/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="/static/admAssets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="/static/admAssets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
-                    </li>
+                    </li> -->
+                    
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="/static/admAssets/imgs/people/avatar5.jpeg" alt="User"></a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
+                            <!-- <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
                             <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a> -->
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="/admin/logout"><i class="material-icons md-exit_to_app"></i>Logout</a>
                         </div>
@@ -220,8 +212,8 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="row justify-content-center">
+            <!-- ----------------------------------------------------------- -->
+            <!-- <div class="row justify-content-center">
     <div class="col-xl-8 col-lg-12">
         <div class="card mb-4">
             <article class="card-body">
@@ -230,60 +222,40 @@
             </article>
         </div>
     </div>
+</div> -->
+
+
+
+
+<div class="row">
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <article class="card-body">
+          <h5 class="card-title">Sale statistics</h5>
+          <div>
+            <a href="#" class="mx-2" id="monthGraphBtn">
+              <i class="text-muted material-icons md-show_chart"></i>Month Graph
+            </a>
+            <a href="#" class="" id="yearGraphBtn">
+              <i class="text-muted material-icons md-show_chart"></i>Year Graph
+            </a>
+          </div>
+          <canvas id="lineChart" height="120px"></canvas>
+        </article>
+      </div>
+    </div>
+  <div class="col-lg-4">
+    <div class="container">
+        <div class="card mb-4">
+            <article class="card-body">
+                <h5 class="card-title">Payment Statistics</h5>
+                <canvas id="orderChart" height="120px"></canvas>
+            </article>
+        </div>
+    </div>
+  </div>
 </div>
 
-                    
-<div class="card mb-4">
-    <!-- <header class="card-header">
-        <h4 class="card-title">Latest orders</h4>
-        <div class="row align-items-center">
-            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                <div class="custom_select">
-                    <select class="form-select select-nice"> 
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Yearly</option>
-                        <option value="custom">Custom</option>
-                    </select>
-                </div>
-                <div class="col-md-2 col-6">
-                    <button id="generate_report_btn" class="btn btn-primary btn-sm">Generate</button>
-                </div>
-                
-            </div>
-                
-                <div class="col-md-2 col-6">
-                    <label for="start_date" style="color: #000; font-weight: bold;font-size: 16px;">Start Date</label>
-                    <input type="date" id="start_date" name="start_date" value="2021-05-02" class="form-control" max="<%= currentDate %>">
-                </div>
-                <div class="col-md-2 col-6">
-                    <label for="end_date" style="color: #000; font-weight: bold; font-size: 16px;">End Date</label>
-                    <input type="date" id="end_date" name="end_date" value="2021-05-02" class="form-control" max="<%= currentDate %>">
-                </div> -->
-
-
-            
-
-           
-
-            <!-- <div class="col-md-2 col-6">
-                <input type="date" value="02.05.2021" class="form-control">
-            </div> -->
-            <!-- <div class="col-md-2 col-6">
-                <div class="custom_select">
-                    <select class="form-select select-nice">
-                        <option selected>Status</option>
-                        <option>All</option>
-                        <option>Paid</option>
-                        <option>Chargeback</option>
-                        <option>Refund</option>
-                    </select>
-                </div>
-            </div> -->
-
-        <!-- </div>
-    </header> -->
 
     <div class="card mb-4">
         <header class="card-header">
@@ -402,6 +374,7 @@
             </div>
         </footer>
     </main>
+
     <script src="/static/admAssets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="/static/admAssets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="/static/admAssets/js/vendors/select2.min.js"></script>
@@ -539,6 +512,227 @@
         const wb = XLSX.utils.table_to_book(element);
         XLSX.writeFile(wb, 'report.xlsx');
     }
+</script>
+
+
+
+<!-- -----------------graph------------------------------------------------- -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const initialData = {
+        cod: 0,
+        razorPay: 0,
+        wallet: 0
+        };
+    
+        
+        const orderCtx = document.getElementById('orderChart').getContext('2d');
+        const orderChart = new Chart(orderCtx, {
+            type: 'doughnut',
+            data: {
+            labels: ['Cod', 'RazorPay', 'Wallet'],
+            datasets: [{
+                data: Object.values(initialData),
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(255, 205, 86, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(255, 64, 64, 0.7)',
+                ],
+            }],
+            },
+            options: {
+            title: {
+                display: true,
+                text: 'Order Statistics by Status',
+            },
+            plugins: {
+                legend: {
+                labels: {
+                    color: 'orange',
+                },
+                },
+            },
+            },
+        });
+    
+        function updateChartData(data) {
+            orderChart.data.datasets[0].data = Object.values(data);
+            orderChart.update();
+        }
+    
+        function fetchDataAndUpdateChart() {
+            fetch('/fetchdashboard')
+            .then(response => response.json())
+            .then(data => {
+                updateChartData(data.ordersPie);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+    
+        fetchDataAndUpdateChart();
+    
+        function updateGraphWithMonthlyData() {
+            const existingChart = Chart.getChart('lineChart');
+    if (existingChart) {
+        existingChart.destroy();
+    }
+        const months = '<%- JSON.stringify(ordersGraph.labels) %>';
+        const counts = '<%- JSON.stringify(ordersGraph.count) %>';
+    
+    
+        const parsedMonths = JSON.parse(months);
+        const parsedCounts = JSON.parse(counts);
+    
+    
+        const countsWithNull = new Array(parsedMonths.length).fill(null);
+    
+    
+        parsedMonths.forEach((month, index) => {
+        const monthIndex = parsedMonths.indexOf(month);
+        if (monthIndex !== -1) {
+            countsWithNull[monthIndex] = parsedCounts[index];
+        }
+        });
+    
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: parsedMonths,
+            datasets: [{
+            label: 'Orders by Month',
+            data: countsWithNull,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            fill: true,
+            }],
+        },
+        options: {
+            title: {
+            display: true,
+            text: 'Orders by Month',
+            },
+            scales: {
+            x: {
+                type: 'category', 
+                position: 'bottom',
+            },
+            y: {
+                type: 'linear', 
+                ticks: {
+                stepSize: 1, 
+                beginAtZero: true, 
+                },
+            },
+            },
+            plugins: {
+            legend: {
+                labels: {
+                color: 'orange', 
+                },
+            },
+            },
+        },
+        });
+    }
+        function updateYearGraph() {
+        const existingChart = Chart.getChart('lineChart');
+    if (existingChart) {
+        existingChart.destroy();
+    }
+        const years = '<%- JSON.stringify(ordersYearGraph.labels) %>';
+        const counts = '<%- JSON.stringify(ordersYearGraph.count) %>';
+    
+    
+        const parsedYears = JSON.parse(years);
+        const parsedCounts = JSON.parse(counts);
+        const minYear = Math.min(...parsedYears);
+        const maxYear = Math.max(...parsedYears);
+    
+    const yearsToShow = [];
+    for (let i = minYear-3; i <= maxYear+3; i++) {
+    yearsToShow.push(i);
+    }
+    console.log('yearsToShow:', yearsToShow);
+        const countsWithNull = new Array(yearsToShow.length).fill(null);
+    
+        
+        parsedYears.forEach((year, index) => {
+    const yearIndex = yearsToShow.indexOf(parseInt(year));
+    if (yearIndex !== -1) {
+        countsWithNull[yearIndex] = parsedCounts[index];
+    }
+    });
+    console.log('countsWithNull:', countsWithNull);
+    
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: yearsToShow,
+            datasets: [{
+            label: 'Orders by Years',
+            data: countsWithNull,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            fill: true,
+            }],
+        },
+        options: {
+            title: {
+            display: true,
+            text: 'Orders by Years',
+            },
+            scales: {
+            x: {
+                type: 'category', 
+                position: 'bottom',
+            },
+            y: {
+                    type: 'linear',
+                    beginAtZero: true, 
+                    ticks: {
+                        stepSize: 1,
+                    },
+                },
+            },
+            plugins: {
+            legend: {
+                labels: {
+                color: 'orange', 
+                },
+            },
+            },
+        },
+        });
+    }
+    
+    const monthGraphBtn = document.getElementById('monthGraphBtn');
+    const yearGraphBtn = document.getElementById('yearGraphBtn');
+    
+    monthGraphBtn.addEventListener('click', function () {
+        
+        updateGraphWithMonthlyData();
+        
+        monthGraphBtn.classList.add('active');
+        yearGraphBtn.classList.remove('active');
+    });
+    
+    yearGraphBtn.addEventListener('click', function () {
+        
+        updateYearGraph();
+    
+        
+        yearGraphBtn.classList.add('active');
+        monthGraphBtn.classList.remove('active');
+    });
+    
+    updateGraphWithMonthlyData();
+    })   
 </script>
 
 

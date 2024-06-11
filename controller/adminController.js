@@ -21,7 +21,12 @@ const adminController ={
  // Admin Home-----------------------------------------------   
  adminHome: async (req, res, next) => {
     try {
-        // Fetching data
+
+            const ordersPie = await chart()
+            const ordersGraph = await monthgraph();
+            const ordersYearGraph = await yeargraph();
+
+      
         const users = await User.find();
         const orders = await Order.find().populate('items.product').sort({ orderDate: -1 });
         const products = await Products.find();
@@ -29,17 +34,17 @@ const adminController ={
         
         const currentDate = new Date().toISOString().split('T')[0];
 
-        // Filter orders
+   
         const paidOrders = orders.filter(order => order.paymentStatus === "Paid");
         const filteredOrders = orders.filter(order => order.paymentStatus !== "Failed" && order.status !== "Cancelled");
         
-        // Calculate revenue
+        
         let revenue = 0;
         paidOrders.forEach(order => {
             revenue += order.totalPrice;
         });
 
-        // Aggregations
+     
         const salesCount = await Order.aggregate([
             { $match: { 'items.status': 'Delivered' } },
             { $count: 'salesCount' }
@@ -85,6 +90,11 @@ const adminController ={
             orders: filteredOrders,
             products: products,
             users: users,
+
+            ordersPie:ordersPie,
+            ordersGraph: ordersGraph,
+            ordersYearGraph: ordersYearGraph,
+           
         });
     } catch (err) {
         next(err);
@@ -192,6 +202,111 @@ postAdminLogin: (req, res, next) => {
     error:(req,res)=>{
         res.render('error404')
     },
+}
+
+    async function chart() {
+        try {
+            const orders = await Order.find();
+            const paymentMethods = {
+                cashOnDelivery: 'COD',
+                razorPay: 'Razorpay',
+                wallet: 'Wallet'
+            };
+            const ordersCount = {
+                cashOnDelivery: 0,
+                razorPay: 0,
+                wallet: 0
+            };
+
+            orders.forEach(order => {
+                if (order.paymentMethod === paymentMethods.cashOnDelivery) {
+                    ordersCount.cashOnDelivery++;
+                } else if (order.paymentMethod === paymentMethods.razorPay) {
+                    ordersCount.razorPay++;
+                } else if (order.paymentMethod === paymentMethods.wallet) {
+                    ordersCount.wallet++;
+                }
+            });
+
+            return ordersCount;
+        } 
+        catch (error) {
+            console.error("An error occurred in the chart function:", error.message);
+            throw error;
+        }
+    }
+
+
+
+    async function monthgraph() {
+        try {
+            const ordersCountByMonth = await Order.aggregate([
+                {
+                    $project: {
+                        yearMonth: {
+                            $dateToString: {
+                                format: "%Y-%m",
+                                date: "$orderDate"
+                            }
+                        }
+                    }
+                },
+                {
+                    $group: {
+                        _id: "$yearMonth",
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $sort: { _id: 1 }
+                }
+            ]);
+    
+            const labels = ordersCountByMonth.map(val => val._id);
+            const count = ordersCountByMonth.map(val => val.count);
+    
+            return {
+                labels: labels,
+                count: count
+            };
+        } catch (error) {
+            console.log('Error retrieving orders in monthgraph function:', error.message);
+            throw error;
+        }
+    }
+    
+
+
+    async function yeargraph() {
+        try {
+            const ordersCountByYear = await Order.aggregate([
+                {
+                    $project: {
+                        year: { $year: { date: '$orderDate' } },
+                    },
+                },
+                {
+                    $group: {
+                        _id: '$year',
+                        count: { $sum: 1 },
+                    },
+                },
+                {
+                    $sort: { _id: 1 },
+                },
+            ]);
+    
+            const labels = ordersCountByYear.map((val) => val._id.toString());
+            const count = ordersCountByYear.map((val) => val.count);
+    
+            return {
+                labels: labels,
+                count: count
+            };
+        } catch (error) {
+            console.log('Error retrieving orders in yeargraph function:', error.message);
+            throw error;
+        }
 
 
 

@@ -17,6 +17,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/static/assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link rel="stylesheet" href="/static/assets/css/main.css">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -456,38 +459,31 @@
                             <div class="totall-product"> 
                             
                                
-                                <div class="header-right">
-                                    <form id="categoryForm" action="#" method="GET">
-                                        <select class="select-active" onchange="redirectToCategory(this)">
-                                            <option value="/categoryFilter/">All Categories</option>
-                                            <% cate.forEach((row, index) => { %>
-                                                <% if (row._id.toString() === text) { %>
-                                                    <option value="/categoryFilter/<%= row._id %>" selected><%= row.category %></option>
-                                                <% } else { %>
-                                                    <option value="/categoryFilter/<%= row._id %>"><%= row.category %></option>
-                                                <% } %>
-                                            <% }); %>
-                                        </select>
-                                    </form>
-                                </div>
-                               <script>
-                                // JavaScript function to fetch and render content based on selected category
-function redirectToCategory(selectElement) {
-    var selectedValue = selectElement.value;
-    if (selectedValue) {
-        fetch(selectedValue)
-            .then(response => response.text())
-            .then(data => {
-                // Assuming there is a target element where you want to render the fetched content
-                document.getElementById('targetElementId').innerHTML = data;
-            })
-            .catch(error => console.error('Error fetching data:', error));
+<div class="header-right">
+    <!-- <div class="search-style-2"> -->
+    <form id="categoryForm" action="#" method="GET">
+        <select class="select-active" onchange="redirectToCategory(this)">
+            <option value="/categoryFilter/">All Categories</option>
+            <% cate.forEach((row, index) => { %>
+                <% if (row._id.toString() === text) { %> <!-- Check if the category matches the selected category -->
+                    <option value="/categoryFilter/<%= row._id %>" selected><%= row.category %></option>
+                <% } else { %>
+                    <option value="/categoryFilter/<%= row._id %>"><%= row.category %></option>
+                <% } %>
+            <% }); %>
+        </select>
+    </form>
+    <!-- </div> -->
+</div>
+
+<script>
+    function redirectToCategory(selectElement) {
+        var selectedValue = selectElement.value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
     }
-}
-
 </script>
-
-
                             </div> 
                             <div class="sort-by-product-area">
                                  
@@ -528,54 +524,60 @@ function redirectToCategory(selectElement) {
                         
 <!-- ----------------------------------------product views ---------------------------------------->
 <div class="product-list mb-50" >
-    <% products.forEach((row,index)=>{ %>
-    <div class="product-cart-wrap">
-        <div id="popup-messages">
-            <% if (typeof successMessage !== 'undefined') { %>
-                <div class="alert alert-success" role="alert">
-                    <%= successMessage %>
+<div class="container">
+    <div class="row">
+       
+        <% products.forEach((row, index) => { %>
+        <div class="col-md-6 mb-4">
+            <div class="product-cart-wrap">
+                <div id="popup-messages">
+                    <% if (typeof successMessage !== 'undefined') { %>
+                        <div class="alert alert-success" role="alert">
+                            <%= successMessage %>
+                        </div>
+                    <% } %>
+
+                    <% if (typeof alertMessage !== 'undefined') { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= alertMessage %>
+                        </div>
+                    <% } %>
                 </div>
-            <% } %>
-            
-            <% if (typeof alertMessage !== 'undefined') { %>
-                <div class="alert alert-danger" role="alert">
-                    <%= alertMessage %>
+                <div class="product-img-action-wrap">
+                    <div class="product-img product-img-zoom">
+                        <a href="<%= row._id %>">
+                            <img class="default-img" src="/static/<%= row.images[0] %>" alt="">
+                            <img class="hover-img" src="/static/<%= row.images[1] %>" alt="">
+                        </a>
+                    </div>
+                    <div class="product-action-1">
+                        <a aria-label="Add To Wishlist" class="action-btn hover-up" onclick="addToWishlist('<%= row._id %>')"><i class="fi-rs-heart"></i></a>
+                    </div>
                 </div>
-            <% } %>
+                <div class="product-content-wrap">
+                    <h2><a href="/productdetials/<%= row._id %>"><%= row.productname %></a></h2>
+                    <div class="product-price">
+                        <span>Rs. <%= row.price %>.00</span>
+                        <span class="old-price">Rs. <%= row.oldprice %>.00</span>
+                    </div>
+                    <li class="mb-10">Category: <%= row.category.category %></li>
+                    <li class="mb-10"><i class="fi-rs-crown mr-5"></i>Brand: <%= row.brand.brand %></li>
+                    <% if (row.stock == 0) { %>
+                    <div class="product_sort_info font-xs mb-30">
+                        <span class="mb-10 ml-20 text-danger text-center"><b>Out of Stock</b></span>
+                    </div>
+                    <% } else { %>
+                    <div class="product-action-1 show">
+                        <a aria-label="Now" class="action-btn addtocart" onclick="addToCart('<%= row._id %>')"><i class="fi-rs-shopping-bag-add"></i>Add to Cart</a>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
         </div>
-        <div class="product-img-action-wrap">
-            <div class="product-img product-img-zoom">
-                <a href="<%= row._Id %>">
-                    <img class="default-img"  src="/static/<%= row.images[0] %>" alt="">
-                    <img class="hover-img"  src="/static/<%= row.images[1] %>" alt="">
-                </a>
-            </div>
-            <div class="product-action-1">
-                <a aria-label="Add To Wishlist" class="action-btn hover-up" onclick="addwishlist('<%= row._id %>')" ><i class="fi-rs-heart"></i></a>
-            </div>
-        </div>
-        <div class="product-content-wrap">
-            <h2><a href="/productdetials/<%= row._id %>"><%= row.productname%></a></h2>
-            <div class="product-price">
-                <span> Rs. <%= row.price %>.00</span>
-                <span class="old-price"> Rs.  <%= row.oldprice %>.00</span>
-            </div>
-   
-            <li class="mb-10">Category: <%= row.category.category %></li>
-            <li class="mb-10"><i class="fi-rs-crown mr-5"></i>Brand: <%= row.brand.brand %></li>
-            <% if(row.stock==0){ %>
-            <div class="product_sort_info font-xs mb-30">
-                    <span class="mb-10 ml-20 text-danger text-center"><b>Out of Stock</b></span>
-            </div>
-            <% } else { %>
-            <div class="product-action-1 show">
-                <a aria-label="Now" class="action-btn addtocart" onclick="addcart('<%= row._id %>')"  ><i class="fi-rs-shopping-bag-add"></i>Add to Cart</a>
-            </div>
-            <% } %>
-        </div>
-    </div>
         <% }) %>
+    </div>
 </div>
+
 <!--------------------------------------------------------product view ends ------------------------------------------>
 
                         <!--pagination-->
@@ -743,6 +745,78 @@ function redirectToCategory(selectElement) {
     <!-- Template  JS -->
     <script src="/static/assets/js/main.js"></script>
     <script src="/static/assets/js/shop.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+                            <script>
+                                async function addToCart(productId) {
+                                    fetch(`/user/addtocart/${productId}`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ productId: productId }),
+                                    })
+                                    .then(response => response.json()) // Parse the JSON response
+                                    .then(data => {
+                                        if (data.success) {
+                                            // Success message
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: data.message,
+                                                showConfirmButton: true,
+                                            }).then(() => {
+                                                // Optional: Redirect to another page after showing the success message
+                                                // window.location.href = '/cartpage';
+                                            });
+                                        } else {
+                                            // Failure message (if needed)
+                                            console.log('Product not added to cart.');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        // Error handling
+                                        console.error('Error adding product to cart:', error);
+                                    });
+                                }
+                            </script>
+                            
+                      
+                         
+                           
+                            <script>
+                                  
+                                async function addToWishlist(productId) {
+                                
+                                    fetch(`/user/addToWishlist/${productId}`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ productId: productId }),
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            Swal.fire({
+                                                position: "top-end",
+                                                icon: "success",
+                                                title: data.message,
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                icon: "warning",
+                                                title: data.message,
+                                                showConfirmButton: true,
+                                            });
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error adding to wishlist:', error);
+                                    });
+                                }
+                            </script>
+                            
+                            
 </body>
 
 

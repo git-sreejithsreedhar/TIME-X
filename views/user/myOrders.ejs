@@ -88,16 +88,16 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Mobile Hub
+                                <span class="fi-rs-apps"></span>
                             </a>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a  href="/">Home</i></a>
-                                    <li><a href="/shop">Shop</i></a></li>
-                                    <li class="position-static"><a class="active" href="/profile">My Profile</i></a></li>
-                                    <li><a href="/wallet">Wallet</a></li>
+                                    <li><a  href="/userHome">Home</i></a>
+                                    <li><a href="/user/shop">Shop</i></a></li>
+                                    <li class="position-static"><a class="active" href="/user/dashboard">My Profile</i></a></li>
+                                    <li><a href="/user/wallet">Wallet</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -215,16 +215,16 @@
                                 <div class="dashboard-menu">
                                     <ul class="nav flex-column" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link " href="/profile"></i>Dashboard</a>
+                                            <a class="nav-link " href="/user/dashboard"></i>Dashboard</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="/user/orderdetails" ><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                            <a class="nav-link active" href="/user/myOrders" ><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link"  href="/myaddress" ><i class="fi-rs-marker mr-10"></i>My Address</a>
+                                            <a class="nav-link"  href="/user/address" ><i class="fi-rs-marker mr-10"></i>My Address</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/account-info" ><i class="fi-rs-user mr-10"></i>Account details</a>
+                                            <a class="nav-link" href="/user/edit-profile" ><i class="fi-rs-user mr-10"></i>Account details</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -257,7 +257,7 @@
                                                                         <td><%= order.paymentStatus %></td>
                                                                         <td>Rs. <%= order.totalprice %></td>
                                                                         <% if (order.paymentStatus== 'Failed') { %>
-                                                                            <th><a href="/checkOut?itemId=<%= order._id  %>" class="btn btn-small d-block" style="background-color: orange;">Retry Payment</a></th>                                                                                
+                                                                            <th><a href="/user/checkOut?itemId=<%= order._id  %>" class="btn btn-small d-block" style="background-color: orange;">Retry Payment</a></th>                                                                                
                                                                         <% } else { %>
                                                                         <th><a href="/user/orderdetails/<%= order._id %>" class="btn btn-small d-block" >More Info</a></th>
                                                                         <% } %> 

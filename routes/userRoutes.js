@@ -40,10 +40,10 @@ router.post('/user/login', userController.postuserLogin)
 router.get('/logout',userController.getlogout)
 
 router.get('/user/shop', userController.getshopPage)
-router.get('/priceFilter/:category?',isUser,userController.getshopPage);
-router.get('/categoryFilter/:category?',isUser, userController.getshopPage);
+router.get('/priceFilter/:category?',userController.getshopPage);
+router.get('/categoryFilter/:category?', userController.getshopPage);
 
-
+// router.get('/search',userController.search)
 router.get('/user/productdetails/:id', userController.getuserproductdetails)
 
 
@@ -77,7 +77,9 @@ router.post('/placeorder',isUser,orderController.postcheckout)
 
 router.get('/user/myOrders', isUser, orderController.getMyOrders)
 router.get('/user/orderdetails/:Id', isUser, orderController.getOrderDetails)
-router.patch('/user/cancel-order', isUser, orderController.postCancelOrders)
+router.patch('/user/cancel-order', isUser, orderController.cancelOrders)
+router.patch('/returnorder', isUser, orderController.returnOrtders)
+
 
 
 router.get('/user/wishlist', isUser, wishlistController.getWishlist)
@@ -90,5 +92,10 @@ router.post('/apply-Coupon', orderController.applyCoupon)
 router.get('/user/wallet', isUser, userController.getWallet)
 router.post('/walletdeposite', isUser, userController.postAddAmount)
 router.post('/check-wallet-balance', isUser,userController.checkWalletBalance)
+
+router.get('/downloadinvoice/:Id',isUser,orderController.getOrderInvoice)
+
+// ---------------------------------------------------------------------------------
+
 
 module.exports = router

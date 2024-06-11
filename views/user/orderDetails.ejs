@@ -88,16 +88,16 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Mobile Hub
+                                <span class="fi-rs-apps"></span> 
                             </a>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a  href="/">Home</i></a>
-                                    <li><a href="/shop">Shop</i></a></li>
-                                    <li class="position-static"><a class="active" href="/profile">My Profile</i></a></li>
-                                    <li><a href="/wallet">Wallet</a></li>
+                                    <li><a  href="/userHome">Home</i></a>
+                                    <li><a href="/user/shop">Shop</i></a></li>
+                                    <li class="position-static"><a class="active" href="/user/dashboard">My Profile</i></a></li>
+                                    <li><a href="/user/wallet">Wallet</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -313,7 +313,7 @@
                                                                             <tr>
                                                                                 <td>
                                                                                     <a class="itemside" href="#">
-                                                                                        <div class="info"> <%= row.product.productname %>, </div>
+                                                                                        <div class="info"> <%= row.product.productname %> </div>
                                                                                     </a>
                                                                                     
                                                                                 </td>
@@ -322,15 +322,23 @@
                                                                                 <td> <%= row.status %> </td>
                                                                                 <% if (row.status === 'Delivered') { %>
                                                                                     <td><a href="#" class="btn-small d-block" onclick="returnOrderIndividually('<%= order._id %>','<%= row.product._id %>')" style="color: red;">Return Order</a></td>
-                                                                                <% } else if (row.status === 'Cancelled'|| row.status === 'Returned' ) { %>
+                                                                                    
                                                                                     <td><span style="color: red;">N/A</span></td>
-                                                                                <% } else { %>
+                                                                                <% } else if (row.status === 'Returned' || row.status === 'Cancelled') { %>
+                                                                                    <td><a href="#" class="btn-small d-block" onclick="returnOrderIndividually('<%= order._id %>','<%= row.product._id %>')" style="color: red;"></a></td>
+                                                                                    <!-- <td><span style="color: red;">N/A</span></td> -->
+                                                                                 <%} else  { %>
                                                                                     <td><a href="#" class="btn-small d-block" onclick="cancelOrderIndividually('<%= order._id %>','<%= row.product._id %>')" style="color: red;">Cancel Order</a></td>
                                                                                 <% } %>
                                                                             </tr>
                                                                             <% }) %>
                                                                           </tbody>
                                                                     </table> 
+                                                                   
+                                                                    <% if (order.items.some(item => item.status === 'Delivered')) { %>
+                                                                        <!-- <p><a class="link-offset-3" href="#">Download Invoice </a></p> -->
+                                                                        <div class="align-items-end " ><a href="/downloadinvoice/<%= order._id %>" class="btn btn-small d-block" >Download Invoice</a></div>
+                                                                    <% } %>
                                                                 </div> <!-- table-responsive// -->
                                                             </div> <!-- col// -->
                                                             <div class="col-lg-1"></div>
@@ -507,37 +515,49 @@
         }, 4000);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <!-- cancel order -->
     <script>
         async function cancelOrderIndividually(orderId, productId) {
             try {
-                console.log(productId)
-                console.log(orderId)
-                const response = await fetch('/user/cancel-order', {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ orderId, productId })
+                const { isConfirmed } = await Swal.fire({
+                    title: "Are you sure?",
+                    text: "Cancel the order!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, cancel it!"
                 });
     
-                if (!response.ok) {
-                    throw new Error('Failed to cancel order');
-                }
-    
-                const data = await response.json();
-    
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Item Cancelled Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
+                if (isConfirmed) {
+                    const response = await fetch('/user/cancel-order', {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ orderId, productId })
                     });
     
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
+                    if (!response.ok) {
+                        throw new Error('Failed to cancel order');
+                    }
+    
+                    const data = await response.json();
+    
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Item Cancelled Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+    
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
@@ -546,10 +566,86 @@
                 });
             }
         }
-    </script>    
+    </script>
+    
     <script>
         async function returnOrderIndividually(orderId, productId) {
             try {
+
+
+                const { value: reason } = await Swal.fire({
+    title: "Reason for cancellation",
+    input: "select",
+    inputOptions: {
+        Defect: "Product is not good",
+        wrongProduct: "Not the product ordered",
+        wrongColor: "Wrong product color",
+        others: "Other"
+    },
+    inputPlaceholder: "Select",
+    showCancelButton: true,
+    inputValidator: (value) => {
+        return new Promise((resolve) => {
+            if (value !== "Select") {
+                resolve();
+            } else {
+                resolve("Choose a reason for the return :)");
+            }
+        });
+    }
+});
+
+if (reason) {
+    Swal.fire(`You selected: ${reason}`);
+}
+
+                // const { value: reason } = await Swal.fire({
+                //     title: "Reason for cancellation",
+                //     input: "select",
+                //     inputOptions: {
+                //         Select: {
+                //         Defect : "product is not good",
+                //         wrongProduct: "Not the product ordered",
+                //         wrongColor: "wrong product color",
+                //         others: "Other"
+                //         },
+                //         // Vegetables: {
+                //         // potato: "Potato",
+                //         // broccoli: "Broccoli",
+                //         // carrot: "Carrot"
+                //         // },
+                //         // icecream: "Ice cream"
+                //     },
+                //     inputPlaceholder: "Select",
+                //     showCancelButton: true,
+                //     inputValidator: (value) => {
+                //         return new Promise((resolve) => {
+                //             console.log(value, reason);
+                //         if (value !== "Select") {
+                //             resolve();
+                //         } else {
+                //             resolve("choose a reason for the return :)");
+                //         }
+                //         });
+                //     }
+                //     });
+                //     if (reason) {
+                //     Swal.fire(`You selected: ${reason}`);
+                //     }
+
+
+
+                const { isConfirmed } = await Swal.fire({
+                    title: "Are you sure?",
+                    text: "Return the order!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, return it!"
+                });
+            // try {
+                if (isConfirmed) {
                 const response = await fetch('/returnorder', {
                     method: 'PATCH',
                     headers: {
@@ -575,6 +671,9 @@
                 setTimeout(() => {
                     window.location.reload();
                 }, 2000);
+                
+
+            }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',

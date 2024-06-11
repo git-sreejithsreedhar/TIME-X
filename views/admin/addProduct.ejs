@@ -17,6 +17,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="/static/assets1/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link href="/static/assets1/css/main.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -92,60 +94,7 @@
     </aside>
  <!-------------side navbar Ends------------------------------------------------------------------------------->   
     <main class="main-wrap">
-        <header class="main-header navbar">
-            <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
-            </div>
-            <div class="col-nav">
-                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="/static/assets1/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="/static/assets1/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="/static/assets1/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="/static/assets1/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="/static/assets1/imgs/people/avatar2.jpg" alt="User"></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
+       
         <section class="content-main">
             <form action="/productsubmit" method="post" enctype="multipart/form-data" onsubmit="return validateForm(event)">
             <div class="row">
@@ -157,9 +106,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <!-- <div class=""></div> -->
                             <div class="row">
                                 <div class="col-md-3">
                                     <h6>1. General info</h6>
@@ -246,30 +196,176 @@
                                     <h6>4. Product Images</h6>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="mb-4">
-                                        <label class="form-label">Image-1</label>
-                                        <input class="form-control" id="product_image1" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 1)" required>
-                                        <span id="image1-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        <div id="image-preview1" class="image-preview mb-2"></div>
-                                        <button class="btn btn-secondary mt-2" id="crop-button1" style="display: none;" 
-                                        onclick="cropImage(1)">Crop</button>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Image-2</label>
-                                        <input class="form-control" id="product_image2" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 2)" required>
-                                        <span id="image2-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        <div id="image-preview2" class="image-preview mb-2"></div>
-                                        <button class="btn btn-secondary mt-2" id="crop-button2" style="display: none;" 
-                                        onclick="cropImage(2)">Crop</button>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Image-3</label>
-                                        <input class="form-control" id="product_image3" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 3)" >
-                                        <span id="image3-error" style="font-size: 14px; margin-top: -20px"></span>
-                                        <div id="image-preview3" class="image-preview mb-2"></div>
-                                        <button class="btn btn-secondary mt-2" id="crop-button3" style="display: none;" onclick="cropImage(3)">Crop</button>
-                                    </div>
-                                </div> <!-- col.// -->
+<!-- --------------------------------------------------------------------------------------- -->
+
+
+<style>
+    .image-preview {
+        width: 679px; /* Adjust as needed */
+        height: 679px; /* Adjust as needed */
+        margin-top: 10px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .img-thumbnail {
+        max-width: 50%;
+        max-height: 50%;
+    }
+
+    .remove-icon {
+        display: none;
+        font-size: 24px;
+        color: red;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 20;
+    }
+</style>
+</head>
+<body>
+<form id="image-form">
+    <div class="mb-4">
+        <label class="form-label">Image-1</label>
+        <input class="form-control" id="product_image1" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 1)" required>
+        <span id="image1-error" style="font-size: 14px; margin-top: -20px"></span>
+        <button class="btn btn-link" id="dropdown-trigger1" type="button" onclick="togglePreview(1)">Click Here to Preview</button>
+        <div id="image-preview-container1" class="image-preview mb-2" style="display:none;">
+            <div id="image-preview1" class="image-preview mb-2"></div>
+            <button class="btn btn-secondary mt-2" id="crop-button1" style="display: none;" type="button" onclick="cropImage(1)">Crop</button>
+            <i class="fas fa-sync-alt remove-icon" id="remove-icon1" onclick="removeImage(1)"></i>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label">Image-2</label>
+        <input class="form-control" id="product_image2" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 2)" required>
+        <span id="image2-error" style="font-size: 14px; margin-top: -20px"></span>
+        <button class="btn btn-link" id="dropdown-trigger2" type="button" onclick="togglePreview(2)">Click Here to Preview</button>
+        <div id="image-preview-container2" class="image-preview mb-2" style="display:none;">
+            <div id="image-preview2" class="image-preview mb-2"></div>
+            <button class="btn btn-secondary mt-2" id="crop-button2" style="display: none;" type="button" onclick="cropImage(2)">Crop</button>
+            <i class="fas fa-sync-alt remove-icon" id="remove-icon2" onclick="removeImage(2)"></i>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label">Image-3</label>
+        <input class="form-control" id="product_image3" type="file" name="images" accept="image/png, image/jpeg, image/jpg" onchange="previewAndCropImage(event, 3)">
+        <span id="image3-error" style="font-size: 14px; margin-top: -20px"></span>
+        <button class="btn btn-link" id="dropdown-trigger3" type="button" onclick="togglePreview(3)">Click Here to Preview</button>
+        <div id="image-preview-container3" class="image-preview mb-2" style="display:none;">
+            <div id="image-preview3" class="image-preview mb-2"></div>
+            <button class="btn btn-secondary mt-2" id="crop-button3" style="display: none;" type="button" onclick="cropImage(3)">Crop</button>
+            <i class="fas fa-sync-alt remove-icon" id="remove-icon3" onclick="removeImage(3)"></i>
+        </div>
+    </div>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script>
+    let croppers = {};
+
+    function togglePreview(id) {
+        const dropdownTrigger = document.getElementById(`dropdown-trigger${id}`);
+        const imagePreviewContainer = document.getElementById(`image-preview-container${id}`);
+
+        if (imagePreviewContainer.style.display === "none") {
+            imagePreviewContainer.style.display = "block";
+            dropdownTrigger.textContent = "Hide Image Preview";
+        } else {
+            imagePreviewContainer.style.display = "none";
+            dropdownTrigger.textContent = "Click Here to Preview";
+        }
+    }
+
+    function previewAndCropImage(event, id) {
+        const input = event.target;
+        const file = input.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewContainer = document.getElementById(`image-preview${id}`);
+                previewContainer.innerHTML = `<img id="image-to-crop${id}" src="${e.target.result}" class="img-fluid"/>`;
+
+                const cropButton = document.getElementById(`crop-button${id}`);
+                cropButton.style.display = 'inline-block';
+
+                const removeIcon = document.getElementById(`remove-icon${id}`);
+                removeIcon.style.display = 'inline-block';
+
+                const image = document.getElementById(`image-to-crop${id}`);
+
+                if (croppers[id]) {
+                    croppers[id].destroy();
+                }
+
+                croppers[id] = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 3,
+                    autoCropArea: 1,
+                    responsive: true,
+                    scalable: true,
+                    zoomable: true,
+                    background: false,
+                    minContainerWidth: 679,
+                    minContainerHeight: 679
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function cropImage(id) {
+        const previewContainer = document.getElementById(`image-preview${id}`);
+        const croppedCanvas = croppers[id].getCroppedCanvas({
+            width: 679,
+            height: 679
+        });
+        const croppedImage = document.createElement('img');
+        croppedImage.src = croppedCanvas.toDataURL('image/png');
+        previewContainer.innerHTML = '';
+        previewContainer.appendChild(croppedImage);
+
+        croppedCanvas.toBlob(blob => {
+            const fileInput = document.getElementById(`product_image${id}`);
+            const dataTransfer = new DataTransfer();
+            const file = new File([blob], fileInput.files[0].name, { type: 'image/png' });
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+        }, 'image/png');
+    }
+
+    function removeImage(id) {
+        const input = document.getElementById(`product_image${id}`);
+        const previewContainer = document.getElementById(`image-preview${id}`);
+        const cropButton = document.getElementById(`crop-button${id}`);
+        const removeIcon = document.getElementById(`remove-icon${id}`);
+        
+        input.value = '';
+        previewContainer.innerHTML = '';
+        cropButton.style.display = "none";
+        removeIcon.style.display = "none";
+
+        if (croppers[id]) {
+            croppers[id].destroy();
+            delete croppers[id];
+        }
+    }
+
+    document.getElementById('image-form').addEventListener('submit', function(event) {
+        for (let id in croppers) {
+            if (croppers[id]) {
+                croppers[id].destroy();
+            }
+        }
+    });
+</script>
+                           </div> <!-- col.// -->
                             </div> <!-- .row end// -->
                             
                             
@@ -308,72 +404,10 @@
     <script src="/static/assets1/js/vendors/jquery.fullscreen.min.js"></script>
     <!-- Main Script -->
     <script src="/static/assets1/js/main.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 </body>
-<!-- <script>   
-    const croppers = [];
-    const files = [];
-    let currentIndex = 0;
 
-    function previewImages(event) {
-    const previewContainer = document.getElementById("image-preview");
-    previewContainer.innerHTML = "";
-    const files = event.target.files;
-
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.classList.add("img-preview");
-
-            const deleteIcon = document.createElement("i");
-            deleteIcon.className = "fa-solid fa-trash text-danger";
-            deleteIcon.onclick = function () {
-                this.parentNode.remove();
-                updateSelectedFiles();
-            };
-
-            const replaceIcon = document.createElement("i");
-            replaceIcon.className = "fa-solid fa-repeat text-success ms-2";
-            replaceIcon.onclick = function () {
-                const index = Array.from(this.parentNode.parentNode.children).indexOf(this.parentNode);
-                const fileInput = document.createElement('input');
-                fileInput.type = 'file';
-                fileInput.accept = 'image/*';
-                fileInput.onchange = function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                    img.src = e.target.result;
-                    updateFileInput(file, index);
-                    };
-                    reader.readAsDataURL(file);
-                }
-                };
-                fileInput.click();
-            };
-
-        const cropIcon = document.createElement("i");
-        cropIcon.className = "fa-solid fa-crop text-info ms-2";
-        cropIcon.onclick = function () {
-            cropImage(img, i);
-        };
-
-            const div = document.createElement("div");
-            div.appendChild(img);
-            div.appendChild(deleteIcon);
-            div.appendChild(replaceIcon);
-            div.appendChild(cropIcon);
-            previewContainer.appendChild(div);
-            };
-
-            reader.readAsDataURL(file);
-        }
-        }
-    </script> -->
    <script>
     var nameError = document.getElementById("name-error");
     var descriptionError = document.getElementById("description-error");

@@ -40,7 +40,7 @@ const userController ={
     userhome: async (req,res,next)=>{
        
         try{
-            
+           
             const products = await Products.find({ ispublished: true }).populate('category').populate('brand');
 
         
@@ -327,7 +327,7 @@ postuserLogin: async (req,res,next)=>{
                 req.session.isUser = true,
                 req.session.userData = data
                 // console.log(req.session.user);
-                    // console.log(req.session.user._id)
+                // console.log(req.session.user._id)
                 req.session.isLogged = true;
                 req.session.userID = data._id;
                 // console.log( req.session.userID)
@@ -551,27 +551,52 @@ postaddtoCart: async (req, res, next) => {
     }
 },
 
+//search
+// search: async (req, res, next) => {
+//     try{
+//         const searchTerm = req.query.q;
+//         const category = req.params.category || undefined;
+//         const sort = req.query.sort;
 
-// get User Profile
+//         let query = {
+//             $or: [
+//                 { productname: { $regex: searchTerm, $options: 'i' } },
+//                 { description: { $regex: searchTerm, $options: 'i' } },
+//             ]
+//         };
+        
 
-// getUserProfile: async (req, res, next) => {
-//     try {
+//         if (category) {
+//             query.category = category;
+//         }
 
-//         const userid = req.params.id;
-//         const user = req.session.user;
+//         let sortOptions = {};
+//         if (sort === 'lowToHigh') {
+//             sortOptions.newprice = 1;
+//         } else if (sort === 'highToLow') {
+//             sortOptions.newprice = -1;
+//         } else if (sort === 'A-Z') {
+//             sortOptions.productname = 1;
+//         } else if (sort === 'Z-A') {
+//             sortOptions.productname = -1;
+//         } else if (sort === 'newarrivals') {
+//             sortOptions.created = -1;
+//         }
 
-//         const userFind = await User.findOne({_id: userid})
+//         let searchResult = await Products.find(query).sort(sortOptions);
 
-//         res.render('user/profile', {
-//             user: user,
-//             userdetails : userFind,
-//         })
-
+//         res.render('search', {
+//             products: searchResult,
+//             title: 'Dashboard',
+//             user: req.session,
+//             text: searchTerm
+//         });
 //     }
-//     catch (error) {
-//         next(error)
+//     catch(err){
+//         next(err)
 //     }
 // },
+
 
 
 // edit profile
