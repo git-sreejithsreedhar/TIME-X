@@ -25,8 +25,8 @@ router.get('/user/register', userController.getuserRegister)
 router.post('/user/register', userController.postuserRegister)
 // router.post('/validateReferralCode/:Id', userController.validateReferralCode)
 
-router.get('/auth/google',authController.googleAuth)
-router.get('/auth/google/callback',authController.googleAuthCallback)
+// router.get('/auth/google',authController.googleAuth)
+// router.get('/auth/google/callback',authController.googleAuthCallback)
 
 
 
