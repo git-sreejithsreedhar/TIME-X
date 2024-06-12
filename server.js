@@ -13,7 +13,7 @@ const {v4:uuidv4}= require ('uuid');
 const PORT = process.env.PORT
 
 
-const db = mongoose.connect(process.env.DB_URI)
+const db = mongoose.connect(process.env.DB_URI||"mongodb+srv://sreejithsreedhar96:timeloop1234@cluster0.sbglorb.mongodb.net/" )
 db.then(()=>{
   console.log("Database connected");
 })
