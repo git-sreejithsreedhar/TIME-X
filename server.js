@@ -10,7 +10,7 @@ const passport = require('passport')
 
 
 const {v4:uuidv4}= require ('uuid');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 
 const db = mongoose.connect(process.env.DB_URI)
