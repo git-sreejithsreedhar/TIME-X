@@ -19,7 +19,7 @@ passport.serializeUser((user, done) => {
 
 
   passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientID: process.env.GOOGLE_CLIENT_ID || "648251317115-qf1j9d4p0tuq5ikc57l4ajvu8sqhmei1.apps.googleusercontent.com",
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_URL,
 
